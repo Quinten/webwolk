@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Webwolk</title>
+    <meta name="description" content="In de wolken van het web.">
+    <style>
+        body {
+            background: #568984;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c"></canvas>
+<script>
+    var webwolk = {};
+    webwolk.setup = function () {
+
+      // grab canvas and drawing context
+      var canvas = document.getElementById('c')
+      var context = canvas.getContext('2d');
+
+      // handle window resizing
+      var center = {x: 200, y: 200};
+      function onR () {
+            canvas.width = window.innerWidth;
+            canvas.height = (window.innerHeight > 240) ? 200 : window.innerHeight - 40;
+            center.x = canvas.width / 2;
+            center.y = canvas.height / 2;
+            context.translate(center.x, center.y);
+            canvas.style["margin-top"] = String((window.innerHeight - canvas.height) / 2) + "px";
+      }
+      window.addEventListener('resize', onR, false); // on event
+      onR(); // and on setup
+
+      // preload the images
+      var images = ["img/wolktile.png", "img/wolkske.png", "img/wolkskeback.png", "img/wolkskefront.png"];
+      var sprites = [];
+      var nLoaded = 0;
+      for ( var i = 0; i < images.length; i++ ) {
+        sprites[i] = { x: 0, y: 0 };
+        sprites[i].img = new Image();
+        sprites[i].img.onload = function () {
+          // check if everything is loaded
+          nLoaded++;
+          if ( nLoaded === images.length ) {
+            // keep track of the images positions
+            var position = [];
+            position[0] = -(canvas.width / 2) - 200;
+            position[1] = (canvas.width / 2);
+            position[2] = -(canvas.width / 2) - 600;
+            position[3] = -(canvas.width / 2) - 1000;
+            // then start animation
+            var old_time = 0;
+            (function onF (time) {
+              window.requestAnimationFrame(onF, canvas);
+              var elapsed = time - old_time;
+              old_time = time;
+
+              // draw bg
+              position[0] += 2 * elapsed / 17;
+              if (position[0] > -canvas.width / 2) {
+                position[0] -= 200;
+              }
+              for (var p = 0; p < ((canvas.width / 200) | 0) + 2; p++){
+                context.drawImage(sprites[0].img, position[0] + p * 200, -100);
+              }
+
+              // draw secondary bg
+              position[2] += 3 * elapsed / 17;
+              if (position[2] > -canvas.width / 2) {
+                position[2] -= 600;
+              }
+              for (p = 0; p < ((canvas.width / 600) | 0) + 2; p++){
+                context.drawImage(sprites[2].img, position[2] + p * 600, -100);
+              }
+
+              // draw the brave cloud
+              position[1] -= 1 * elapsed / 17;
+              if (position[1] < (-canvas.width / 2) - sprites[1].img.width) {
+                position[1] += canvas.width + sprites[1].img.width;
+              }
+              context.drawImage(sprites[1].img, position[1], -sprites[1].img.height / 2);
+
+              // draw fg
+              position[3] += 5 * elapsed / 17;
+              if (position[3] > -canvas.width / 2) {
+                position[3] -= 1000;
+              }
+              for (p = 0; p < ((canvas.width / 1000) | 0) + 2; p++){
+                context.drawImage(sprites[3].img, position[3] + p * 1000, -100);
+              }
+
+            }());// end animation init
+          }
+        }
+        sprites[i].img.src = images[i];
+      }// end preload loop
+
+    };// end setup closure
+
+    webwolk.setup();
+
+</script>
+</body>
+</html>
