@@ -3,128 +3,153 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Webwolk</title>
-    <meta name="description" content="In de wolken van het web.">
+    <title>Webwolk ontwikkelt vliegensvlugge websites</title>
+    <meta name="description" content="Kies voor een snelle en responsive website of applicatie op maat, waar je klanten geen lokale depressie van krijgen.">
     <style>
         body {
-            background: #568984;
+            background: #eff5f5;
+            color: #568984;
             margin: 0;
-            overflow: hidden;
-            font-family: sans-serif;
+            font-family: "Comfortaa", system-ui, sans-serif;
+            font-size: 1.15em;
+            line-height: 1.5;
         }
         a {
-            color: #fff;
-        }
-        a:hover {
-            color: #fff;
+            color: #568984;
             opacity: 0.65;
         }
+        a:hover {
+            color: #568984;
+            opacity: 0.85;
+        }
         a:active {
-            color: #fff;
-            opacity: 0.35;
+            color: #568984;
         }
         a:visited {
-            color: #fff;
+            color: #568984;
         }
-        .text-center {
-            text-align: center;
+        main {
+            max-width: 34em;
+            margin: 2em auto 4em;
+            padding: 0 1em;
+        }
+        hr {
+            border: 0;
+            border-top: 1px dotted #568984;
+            margin: 2em 0;
+            opacity: 0.35;
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-    <canvas id="c"></canvas>
-    <p class="text-center">
-        <a href="https://quinten.github.io/">Quinten Clause Project Index</a>
-    </p>
+    <div style="position: relative; top: 0; left: 0; width: 100%; height: 200px; overflow: hidden;">
+        <canvas id="c"></canvas>
+    </div>
+    <main>
+        <h1>Webwolk ontwikkelt vliegensvlugge websites</h1>
+        <h2>waarvan iedereen in de wolken is</h2>
+        <p>Kies voor een snelle en responsive website of applicatie op maat, waar je klanten geen lokale depressie van krijgen.</p>
+        <p>Webwolk blaast nieuw leven in online projecten van elk formaat. Van kleine mysterieuze nevels tot majestueuze stapelwolken.</p>
+        <p>Heb je een idee, maar weet je niet of ik er mee aan de slag kan?</p>
+        <p>Vul dan vrijblijvend <a href="https://forms.gle/NwaqDS5ah3rNivYo9" target="_blank">deze vragenlijst</a> in.</p>
+        <hr>
+        <p>
+            Quinten Clause<br>
+            <a href="https://maps.google.com/?q=Geelseweg+61,+2200+Herentals">
+                Geelseweg 61, 2200 Herentals, België
+            </a><br><br>
+            BE0729837995<br><br>
+            Telefoon: <a href="tel:0032495903491">+32 495 90 34 91</a><br><br>
+            E-mail: <a href="mailto:info@webwolk.be">info@webwolk.be</a>
+        </p>
+    </main>
 <script>
     var webwolk = {};
     webwolk.setup = function () {
-
-      // grab canvas and drawing context
-      var canvas = document.getElementById('c')
-      var context = canvas.getContext('2d');
-
-      // handle window resizing
-      var center = {x: 200, y: 200};
-      function onR () {
+        var canvas = document.getElementById('c')
+        var context = canvas.getContext('2d');
+        function onR () {
             canvas.width = window.innerWidth;
-            canvas.height = (window.innerHeight > 240) ? 200 : window.innerHeight - 40;
-            center.x = canvas.width / 2;
-            center.y = canvas.height / 2;
-            context.translate(center.x, center.y);
-            canvas.style["margin-top"] = String((window.innerHeight - canvas.height) / 2) + "px";
-      }
-      window.addEventListener('resize', onR, false); // on event
-      onR(); // and on setup
+            canvas.height = 200;
+            context.translate(canvas.width / 2, canvas.height / 2);
+        }
+        window.addEventListener('resize', onR, false);
+        onR();
 
-      // preload the images
-      var images = ["img/wolktile.png", "img/wolkske.png", "img/wolkskeback.png", "img/wolkskefront.png"];
-      var sprites = [];
-      var nLoaded = 0;
-      for ( var i = 0; i < images.length; i++ ) {
-        sprites[i] = { x: 0, y: 0 };
-        sprites[i].img = new Image();
-        sprites[i].img.onload = function () {
-          // check if everything is loaded
-          nLoaded++;
-          if ( nLoaded === images.length ) {
-            // keep track of the images positions
-            var position = [];
-            position[0] = -(canvas.width / 2) - 200;
-            position[1] = (canvas.width / 2);
-            position[2] = -(canvas.width / 2) - 600;
-            position[3] = -(canvas.width / 2) - 1000;
-            // then start animation
-            var old_time = 0;
-            (function onF (time) {
-              window.requestAnimationFrame(onF, canvas);
-              var elapsed = time - old_time;
-              old_time = time;
+        var images = [
+            "img/wolktile.png",
+            "img/wolkske.png",
+            "img/wolkskeback.png",
+            "img/wolkskefront.png"
+        ];
+        var sprites = [];
+        var nLoaded = 0;
+        for ( var i = 0; i < images.length; i++ ) {
+            sprites[i] = { x: 0, y: 0 };
+            sprites[i].img = new Image();
+            sprites[i].img.onload = function () {
+            // check if everything is loaded
+            nLoaded++;
+            if (nLoaded === images.length) {
+                // keep track of the images positions
+                var position = [];
+                position[0] = -(canvas.width / 2) - 200;
+                position[1] = (canvas.width / 2);
+                position[2] = -(canvas.width / 2) - 600;
+                position[3] = -(canvas.width / 2) - 1000;
+                // then start animation
+                var old_time = 0;
+                var onF = function (time) {
+                    window.requestAnimationFrame(onF, canvas);
+                    var elapsed = time - old_time;
+                    old_time = time;
 
-              // draw bg
-              position[0] += 2 * elapsed / 17;
-              if (position[0] > -canvas.width / 2) {
-                position[0] -= 200;
-              }
-              for (var p = 0; p < ((canvas.width / 200) | 0) + 2; p++){
-                context.drawImage(sprites[0].img, position[0] + p * 200, -100);
-              }
+                    // draw bg
+                    position[0] += 0.5 * elapsed / 17;
+                    if (position[0] > -canvas.width / 2) {
+                        position[0] -= 200;
+                    }
+                    for (var p = 0; p < ((canvas.width / 200) | 0) + 2; p++) {
+                        context.drawImage(sprites[0].img, position[0] + p * 200, -100);
+                    }
 
-              // draw secondary bg
-              position[2] += 3 * elapsed / 17;
-              if (position[2] > -canvas.width / 2) {
-                position[2] -= 600;
-              }
-              for (p = 0; p < ((canvas.width / 600) | 0) + 2; p++){
-                context.drawImage(sprites[2].img, position[2] + p * 600, -100);
-              }
+                    // draw secondary bg
+                    position[2] += 1 * elapsed / 17;
+                    if (position[2] > -canvas.width / 2) {
+                        position[2] -= 600;
+                    }
+                    for (p = 0; p < ((canvas.width / 600) | 0) + 2; p++){
+                        context.drawImage(sprites[2].img, position[2] + p * 600, -100);
+                    }
 
-              // draw the brave cloud
-              position[1] -= 1 * elapsed / 17;
-              if (position[1] < (-canvas.width / 2) - sprites[1].img.width) {
-                position[1] += canvas.width + sprites[1].img.width;
-              }
-              context.drawImage(sprites[1].img, position[1], -sprites[1].img.height / 2);
+                    // draw the brave cloud
+                    position[1] -= 6 * elapsed / 17;
+                    if (position[1] < (-canvas.width / 2) - sprites[1].img.width) {
+                        position[1] += canvas.width + sprites[1].img.width;
+                    }
+                    context.drawImage(sprites[1].img, position[1], -sprites[1].img.height / 2);
 
-              // draw fg
-              position[3] += 5 * elapsed / 17;
-              if (position[3] > -canvas.width / 2) {
-                position[3] -= 1000;
-              }
-              for (p = 0; p < ((canvas.width / 1000) | 0) + 2; p++){
-                context.drawImage(sprites[3].img, position[3] + p * 1000, -100);
-              }
-
-            }(0));// end animation init
-          }
+                    // draw fg
+                    position[3] += 2 * elapsed / 17;
+                    if (position[3] > -canvas.width / 2) {
+                        position[3] -= 1000;
+                    }
+                    for (p = 0; p < ((canvas.width / 1000) | 0) + 2; p++){
+                        context.drawImage(sprites[3].img, position[3] + p * 1000, -100);
+                    }
+                };
+                window.requestAnimationFrame(onF, canvas);
+            }
         }
         sprites[i].img.src = images[i];
-      }// end preload loop
-
-    };// end setup closure
-
+      }
+    };
     webwolk.setup();
-
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+</style>
 </body>
 </html>
