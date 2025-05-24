@@ -29,9 +29,15 @@
             color: #4b7772;
         }
         main {
+            margin-top: 200px;
+            background: #eff5f5;
+            position: relative;
+            z-index: 1;
+        }
+        article {
             max-width: 34em;
-            margin: 2em auto 4em;
-            padding: 0 1em;
+            margin: 0 auto 2em;
+            padding: 2em 1em;
         }
         hr {
             border: 0;
@@ -49,26 +55,32 @@
     </noscript>
 </head>
 <body>
-    <div style="position: relative; top: 0; left: 0; width: 100%; height: 200px; overflow: hidden;">
+    <header style="position: fixed; top: 0; left: 0; width: 100%; height: 200px; overflow: hidden;">
         <canvas id="c"></canvas>
-    </div>
+    </header>
     <main>
-        <h1>Webwolk ontwikkelt vliegensvlugge websites</h1>
-        <h2>waarvan iedereen in de wolken is</h2>
-        <p>Kies voor een snelle en responsive website of applicatie op maat, waar je klanten geen lokale depressie van krijgen.</p>
-        <p>Webwolk blaast nieuw leven in online projecten van elk formaat. Van kleine mysterieuze nevels tot majestueuze stapelwolken.</p>
-        <p>Heb je een idee, maar weet je niet of ik er mee aan de slag kan?</p>
-        <p>Vul dan vrijblijvend <a href="https://forms.gle/NwaqDS5ah3rNivYo9" target="_blank">deze vragenlijst</a> in.</p>
-        <hr>
-        <p>
-            Quinten Clause<br>
-            <a href="https://maps.google.com/?q=Geelseweg+61,+2200+Herentals">
-                Geelseweg 61, 2200 Herentals, België
-            </a><br><br>
-            BE0729837995<br><br>
-            Telefoon: <a href="tel:0032495903491">+32 495 90 34 91</a><br><br>
-            E-mail: <a href="mailto:info@webwolk.be">info@webwolk.be</a>
-        </p>
+        <article>
+            <h1>Webwolk ontwikkelt vliegensvlugge websites</h1>
+            <h2>waarvan iedereen in de wolken is</h2>
+            <p>Kies voor een snelle en responsive website of applicatie op maat, waar je klanten geen lokale depressie van krijgen.</p>
+            <p>Webwolk blaast nieuw leven in online projecten van elk formaat. Van kleine mysterieuze nevels tot majestueuze stapelwolken.</p>
+            <p>Heb je een idee, maar weet je niet of ik er mee aan de slag kan?</p>
+            <p>Vul dan vrijblijvend <a href="https://forms.gle/NwaqDS5ah3rNivYo9" target="_blank">deze vragenlijst</a> in.</p>
+            <hr>
+            <p>
+                Quinten Clause<br>
+                <a href="https://maps.google.com/?q=Geelseweg+61,+2200+Herentals">
+                    Geelseweg 61, 2200 Herentals, België
+                </a><br><br>
+                BE0729837995<br><br>
+                Telefoon: <a href="tel:0032495903491">+32 495 90 34 91</a><br><br>
+                E-mail: <a href="mailto:info@webwolk.be">info@webwolk.be</a>
+            </p>
+            <hr>
+            <p>
+                Check zeker ook eens <a href="https://quinten.github.io/">Quinten's andere projecten</a>
+            </p>
+        </article>
     </main>
 <script>
     var webwolk = {};
